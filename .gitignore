@@ -5,4 +5,5 @@ mkosi.output/
 mkosi.cache/
 mkosi.key
 mkosi.crt
+mkosi.cert
 .mkosi-private
