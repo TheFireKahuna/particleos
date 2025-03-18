@@ -17,6 +17,6 @@ Target = usr/lib/modules/*/vmlinuz
 [Action]
 Description = Regenerating UKI stubs...
 When = PostTransaction
-Exec =  /bin/sh -c 'kernel-install add-all'
+Exec =  /bin/sh -c 'kernel-install add-all --image-policy=esp=unprotected:xbootldr=unprotected+unused+absent:root=encrypted:swap=encrypted+unused+absent:home=unprotected:=ignore'
 NeedsTargets
 
