@@ -10,3 +10,6 @@ mv "$BUILDROOT/var/lib/pacman/local" "$BUILDROOT/usr/lib/pacman"
 
 rm "$BUILDROOT/usr/lib/pcsc/drivers/ifd-ccid.bundle/Contents/Info.plist"
 mv "$BUILDROOT/etc/libccid_Info.plist" "$BUILDROOT/usr/lib/pcsc/drivers/ifd-ccid.bundle/Contents/Info.plist"
+
+ln -s "$BUILDROOT/dev/null" "$BUILDROOT/etc/pacman.d/hooks/60-mkinitcpio-remove.hook"
+ln -s "$BUILDROOT/dev/null" "$BUILDROOT/etc/pacman.d/hooks/90-mkinitcpio-install.hook"
