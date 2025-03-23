@@ -3,5 +3,5 @@ name=systemd packages built from upstream main (Fedora_Rawhide)
 type=rpm-md
 baseurl=https://download.opensuse.org/repositories/system:/systemd/Fedora_Rawhide/
 gpgcheck=1
-gpgkey=file:///usr/share/pki/rpm-gpg/system_systemd.gpg
+gpgkey=file:///usr/share/pki/rpm-gpg/system_systemd_Arch.gpg
 enabled=1
