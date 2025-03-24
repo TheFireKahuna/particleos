@@ -38,8 +38,8 @@ readonly MKOSI_DIR="mkosi"
 
 # Default settings
 readonly DEFAULT_ARCHITECTURE="$(uname -m)"
-readonly DEFAULT_DISTRIBUTION="fedora"
-readonly DEFAULT_PROFILE=""  # No profile by default
+readonly DEFAULT_DISTRIBUTION="arch"
+readonly DEFAULT_PROFILE="server"  # No profile by default
 
 # Architecture aliases for user convenience
 declare -A ARCH_ALIASES
@@ -83,6 +83,7 @@ readonly VALID_PROFILES=(
   "desktop:Desktop base profile"
   "gnome:GNOME Desktop environment"
   "kde:KDE Desktop environment"
+  "server:Server environment"
   "obs:OBS packages for systemd"
 )
 
@@ -747,9 +748,9 @@ setup_root_password() {
 
 # Check and setup secure boot keys
 setup_secure_boot_keys() {
-  local key_file="${SCRIPT_DIR}/mkosi.key"
-  local cert_file="${SCRIPT_DIR}/mkosi.crt"
-  local mkosi_bin="${MKOSI_DIR}/bin/mkosi"
+  mkdir -p "${SCRIPT_DIR}/mkosi.extra/usr/share/systemd"
+  local key_file="${SCRIPT_DIR}/mkosi.extra/usr/share/systemd/secure-boot-key.pem"
+  local cert_file="${SCRIPT_DIR}/mkosi.extra/usr/share/systemd/secure-boot-certificate.pem"
   
   if [[ -f "$key_file" && -f "$cert_file" ]]; then
     # Verify key files are valid
@@ -774,7 +775,7 @@ setup_secure_boot_keys() {
   # Generate keys if they don't exist or were removed due to corruption
   if [[ ! -f "$key_file" || ! -f "$cert_file" ]]; then
     print_info "Generating secure boot keys..."
-    if ! safe_exec "$mkosi_bin genkey" "Failed to generate secure boot keys" "300"; then
+    if ! safe_exec "ukify genkey --config=genkey-config.conf" "Failed to generate secure boot keys" "300"; then
       print_error "Key generation failed - check if you have enough entropy"
       return 1
     fi
