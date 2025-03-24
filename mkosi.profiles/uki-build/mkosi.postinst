@@ -1,0 +1,5 @@
+#!/bin/bash
+# SPDX-License-Identifier: LGPL-2.1-or-later
+
+ln -s "$BUILDROOT/dev/null" "$BUILDROOT/etc/pacman.d/hooks/60-mkinitcpio-remove.hook"
+ln -s "$BUILDROOT/dev/null" "$BUILDROOT/etc/pacman.d/hooks/90-mkinitcpio-install.hook"

@@ -1,0 +1,22 @@
+[Trigger]
+Type = Path
+Operation = Install
+Operation = Upgrade
+Operation = Remove
+Target = usr/lib/initcpio/*
+Target = usr/lib/firmware/*
+Target = usr/lib/modules/*/extramodules/
+Target = usr/src/*/dkms.conf
+
+[Trigger]
+Type = Path
+Operation = Install
+Operation = Upgrade
+Target = usr/lib/modules/*/vmlinuz
+
+[Action]
+Description = Regenerating UKI stubs...
+When = PostTransaction
+Exec =  /bin/sh -c 'kernel-install add-all --image-policy=esp=unprotected:xbootldr=unprotected+unused+absent:root=encrypted:swap=encrypted+unused+absent:home=unprotected:=ignore'
+NeedsTargets
+
